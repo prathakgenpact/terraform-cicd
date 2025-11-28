@@ -37,15 +37,3 @@ resource "aws_instance" "demo" {
     Name = "TerraformDemo"
   }
 }
-
-#--------------------------------------------------------------
-# Outputs
-#--------------------------------------------------------------
-
-# Output the decoded secret data
-# Marked as sensitive to prevent exposure in logs and console output
-output "retrieved_secret" {
-  description = "The decoded secret data from AWS Secrets Manager"
-  value       = local.secret_data
-  sensitive   = true
-}
