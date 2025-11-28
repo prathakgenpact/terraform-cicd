@@ -1,0 +1,94 @@
+Step 1: Generate variables.tf..
+# 1. Generate a Terraform variable definition for aws_region with a description, type string, and default value us-east-1.
+
+# 2. Write a Terraform variable block for instance_type including a description, string type, and default value t3.micro.
+
+# 3. Create a Terraform variable named ami_id using HashiCorp style conventions. Include description, type string, and default value ami-0ecb62995f68bb549.
+
+# 4. Generate a Terraform variable for secret_name with description, type string, and default value prathak2.
+
+
+Step 2: Generate provider.tf
+# 1. Generate a Terraform configuration block that defines required providers, including AWS with source hashicorp/aws and version ~> 5.0. Also include required_version >= 1.6.0.
+
+# 2. Write a Terraform provider block for AWS that sets the region to us-east-1.
+
+
+Step 3: Generate main.tf
+# 1. Generate a Terraform data source block for aws_secretsmanager_secret_version that retrieves a secret using the variable secret_name.
+
+# 2. Write a Terraform locals block that defines secret_data by JSON decoding the secret_string from the aws_secretsmanager_secret_version.example data source.
+
+# 3. Create a Terraform resource block for an EC2 instance named demo using variables ami_id and instance_type, and include a Name tag set to TerraformDemo.
+
+# 4. Create a Terraform output block named retrieved_secret that returns local.secret_data and mark it as sensitive = true.
+
+
+Step 4: Generate output.tf
+# 1. Generate a Terraform output block that exposes the public IP of an EC2 instance named aws_instance.demo, including a description.
+
+# 2. Write a Terraform output block for a decoded Secrets Manager value stored in local.secret_data. Include a description and mark the output as sensitive.
+
+
+Step 5: Create .github/worflow/terraform.yml
+
+# 1. Generate a GitHub Actions workflow header for Terraform CI/CD. Include the workflow name, trigger on push to main, and set permissions id-token: write and contents: read.
+
+# 2. Create a GitHub Actions job named terraform-plan that runs on ubuntu-latest. 
+# Include steps to: checkout the repo, configure AWS credentials using secrets, 
+# setup Terraform version 1.6.0, run terraform init, terraform plan, and upload the plan as an artifact.
+
+# 3. Generate a GitHub Actions job named terraform-apply that depends on terraform-plan, runs on ubuntu-latest, and uses an environment named production for manual approval. 
+# Include steps to: checkout the repo, download the terraform plan artifact, configure AWS credentials using secrets, setup Terraform version 1.6.0, run terraform init, and apply the plan with terraform apply -auto-approve tfplan.
+
+
+
+Step 6: Create agent project-planner with prompt
+---
+
+name: project-planner
+
+description: Focuses on understanding requirements and creating clear, actionable project plans and execution strategies.
+
+---
+ 
+You are a project manager responsible for translating requirements into structured, realistic project plans. Your responsibilities:
+ 
+- Analyze user requirements and identify missing details or constraints
+
+- Create project plans including scope, objectives, milestones, deliverables, and timelines
+
+- Break work into clear phases and Work Breakdown Structure (WBS)
+
+- Identify risks, dependencies, and mitigation strategies
+
+- Provide concise documentation and recommendations to ensure successful execution
+ 
+Always communicate in a clear, professional PM style.  
+
+Avoid technical implementation details unless explicitly requested, and focus on planning, organization, and execution strategy.
+
+ 
+# Here are the use cases prompt..
+ <!-- We need to build an internal dashboard that tracks cloud spending across all teams. 
+It should integrate AWS, Azure, and GCP billing APIs, show monthly trends, identify cost anomalies, 
+and send alerts to Slack. The tool must be secure, support SSO, and allow team-level access control. 
+We want an MVP in 8 weeks. -->
+
+<!-- 
+Add a new “Smart Notifications” feature to our mobile app. 
+It should predict when a user is likely to engage and send personalized alerts. 
+It requires ML model integration, backend APIs, opt-out controls, and analytics tracking. 
+We want design, development, testing, and rollout planned. -->
+
+<!-- 
+Our company needs SOC 2 compliance in the next 6 months. 
+We need to update policies, automate logging, improve access control, implement monitoring, 
+and prepare for external audits. The project includes documentation, technical controls, 
+and company-wide training. -->
+
+<! --
+We want to modernize our CI/CD pipelines. 
+Move all services to GitHub Actions, implement automated tests, add security scans, enable 
+environment-based deployments, and set up deployment approvals. 
+The goal is to reduce deployment time by 50% in 10 weeks. -->
